@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+
+<!-- ======================================================================= -->
+<!-- JdbPlot build file                                                    -->
+<!-- ======================================================================= -->
+
+<project name="JettyTest" default="build" basedir=".">
+
+	<!-- Init -->
+	<target name="init">
+
+		<property file="${basedir}/ant.properties" />
+
+		<property environment="env" value="JETTY_HOME" />
+
+		<property name="src.dir" value="${basedir}/src" />
+		<property name="build.dir" value="${basedir}/build" />
+		<property name="build.lib.dir" value="${build.dir}/lib" />
+		<property name="build.classes.dir" value="${build.dir}/classes" />
+		<property name="lib.dir" value="${basedir}/lib" />
+		<condition property="jetty.lib.dir" value="${env.JETTY_HOME}/lib" else="${lib.dir}">
+			<isset property="env.JETTY_HOME" />
+		</condition>
+
+		<path id="jetty.classpath">
+			<fileset dir="${jetty.lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+		<path id="jdbc.classpath">
+			<fileset dir="${lib.dir}">
+				<include name="*.jar" />
+			</fileset>
+		</path>
+
+		<path id="build.classpath">
+			<path refid="jetty.classpath"/>	
+			<path refid="jdbc.classpath"/>	
+			<pathelement location="${build.classes.dir}" />
+		</path>
+		
+
+	</target>
+
+
+	<!-- =================================================================== -->
+	<!-- Prepares the build directory                                        -->
+	<!-- =================================================================== -->
+	<target name="prepare" depends="init">
+		<mkdir dir="${build.classes.dir}" />
+		<mkdir dir="${build.lib.dir}" />
+	</target>
+
+	<!-- copy-resources -->
+	<target name="copy-resources" depends="prepare">
+		<copy todir="${build.classes.dir}">
+			<fileset dir="${src.dir}">
+				<include name="**/*.xml" />
+				<include name="**/*.MF" />
+				<include name="conf/*.properties" />
+				<include name="etc/**" />
+			</fileset>
+		</copy>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Compiles the source code                                            -->
+	<!-- =================================================================== -->
+	<target name="compile" depends="prepare,copy-resources">
+		<javac srcdir="${src.dir}" destdir="${build.classes.dir}" debug="off" deprecation="on" optimize="on">
+			<classpath>
+				<path refid="build.classpath" />
+			</classpath>
+			<include name="**/*.java" />
+		</javac>
+	</target>
+
+	<!-- =================================================================== -->
+	<!-- Creates the jar archives                                            -->
+	<!-- =================================================================== -->
+	<target name="build" depends="jettytest-jar">
+		<echo>created application jar</echo>
+		<echo>check directory build/lib</echo>
+	</target>
+
+	<target name="rebuild" depends="clean, build" />
+
+	<target name="jettytest-jar" depends="compile">
+		<jar jarfile="${build.lib.dir}/${ant.project.name}.jar" basedir="${build.classes.dir}" manifest="${src.dir}/META-INF/manifest.mf">
+			<include name="**/*.class" />
+			<include name="**/*.xml" />
+		</jar>
+		<copy todir="${lib.dir}" file="${build.lib.dir}/${ant.project.name}.jar" />
+	</target>
+
+    <target name="run" depends="jettytest-jar">
+            <java fork="true" classname="atlas.jetty.test.JettyTestOne">
+                    <classpath>
+                            <path refid="build.classpath" />
+                    </classpath>
+                    <!-- sysproperty key="log4j.configuration" value="file:${build.dir}/conf/logging/log4j.xml" / -->
+            </java>
+    </target>
+	
+	<!-- clean the build directory -->
+	<target name="clean" depends="init">
+		<delete dir="${build.dir}" />
+	</target>
+</project>
+

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.6"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-server-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-servlet-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-servlets-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-util-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/servlet-api-2.5.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-http-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-io-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-continuation-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-plus-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-xml-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JALIGN_LIB_DIR/ojdbc6.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-deploy-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-jndi-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-webapp-7.6.5.v20120716.jar"/>
+	<classpathentry kind="var" path="JETTY_HOME/lib/jetty-security-7.6.5.v20120716.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
