@@ -34,7 +34,6 @@ public class JettyTestOne {
             System.out.println("Configuring Jetty Server...");
         	XmlConfiguration configuration = new XmlConfiguration(JettyTestOne.class.getResourceAsStream("/etc/myJetty.xml"));
     		Server server = (Server)configuration.configure();
-            System.out.println("Server configured...");
         	
 //        	server.setHandler(new HelloHandler());
         	
